@@ -4,11 +4,12 @@ namespace Omnipay\Payoo\Message;
 
 use Omnipay\Common\Message\AbstractResponse;
 
-class PurchaseResponse extends AbstractResponse
+class QueryResponse extends AbstractResponse
 {
     public function isSuccessful()
     {
-        return false;
+        $data = $this->getData();
+        return isset($data['errorCode']) && $data['errorCode'] == 0 ? true : false;
     }
 
     public function isPending()
@@ -28,17 +29,21 @@ class PurchaseResponse extends AbstractResponse
 
     public function getRedirectMethod()
     {
-        return 'POST';
+        return 'GET';
     }
 
     public function getRedirectUrl()
     {
-        return $this->request->getEndpoint();
+        if ($this->isSuccessful()) {
+            $data = $this->getData();
+            return $data['payUrl'];
+        } else {
+            return NULL;
+        }
     }
 
     public function getRedirectData()
     {
         return $this->data;
     }
-
 }

@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: xu
- * Date: 5/2/18
- * Time: 10:01 AM
- */
 
 namespace Omnipay\Payoo;
 
@@ -13,7 +7,6 @@ use Omnipay\Common\AbstractGateway;
 
 class Gateway extends AbstractGateway
 {
-
     public function getName()
     {
         return 'Payoo';
@@ -22,11 +15,14 @@ class Gateway extends AbstractGateway
     public function getDefaultParameters()
     {
         return [
-            'apiUsername' => '',
-            'secretKey' => '',
-            'shopId' => '',
-            'shopTitle' => '',
             'shopDomain' => '',
+            'shopTitle' => '',
+            'partnerCode' => '',
+            'accessKey' => '',
+            'secretKey' => '',
+            'apiUsername' => '',
+            'apiPassword' => '',
+            'apiSignature' => ''
         ];
     }
 
@@ -50,24 +46,24 @@ class Gateway extends AbstractGateway
         return $this->setParameter('shopTitle', $shopTitle);
     }
 
-    public function getShopId()
+    public function getPartnerCode()
     {
-        return $this->getParameter('shopId');
+        return $this->getParameter('partnerCode');
     }
 
-    public function setShopId($shopId)
+    public function setPartnerCode($partnerCode)
     {
-        return $this->setParameter('shopId', $shopId);
+        return $this->setParameter('partnerCode', $partnerCode);
     }
 
-    public function getApiUsername()
+    public function getAccessKey()
     {
-        return $this->getParameter('apiUsername');
+        return $this->getParameter('accessKey');
     }
 
-    public function setApiUsername($apiUsername)
+    public function setAccessKey($accessKey)
     {
-        return $this->setParameter('apiUsername', $apiUsername);
+        return $this->setParameter('accessKey', $accessKey);
     }
 
     public function getSecretKey()
@@ -80,14 +76,48 @@ class Gateway extends AbstractGateway
         return $this->setParameter('secretKey', $secretKey);
     }
 
+    public function getApiUsername()
+    {
+        return $this->getParameter('apiUsername');
+    }
+
+    public function setApiUsername($apiUsername)
+    {
+        return $this->setParameter('apiUsername', $apiUsername);
+    }
+
+    public function getApiPassword()
+    {
+        return $this->getParameter('apiPassword');
+    }
+
+    public function setApiPassword($apiPassword)
+    {
+        return $this->setParameter('apiPassword', $apiPassword);
+    }
+
+    public function getApiSignature()
+    {
+        return $this->getParameter('apiSignature');
+    }
+
+    public function setApiSignature($apiSignature)
+    {
+        return $this->setParameter('apiSignature', $apiSignature);
+    }
+
     public function purchase(array $parameters = array())
     {
         return $this->createRequest('\Omnipay\Payoo\Message\PurchaseRequest', $parameters);
+    }
+
+    public function query(array $parameters = array())
+    {
+        return $this->createRequest('\Omnipay\Payoo\Message\QueryRequest', $parameters);
     }
 
     public function completePurchase(array $parameters = array())
     {
         return $this->createRequest('\Omnipay\Payoo\Message\CompletePurchaseRequest', $parameters);
     }
-
 }
