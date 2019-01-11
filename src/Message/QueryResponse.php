@@ -9,7 +9,7 @@ class QueryResponse extends AbstractResponse
     public function isSuccessful()
     {
         $data = $this->getData();
-        return isset($data['errorCode']) && $data['errorCode'] == 0 ? true : false;
+        return isset($data['ResponseCode']) && $data['ResponseCode'] == 0 ? true : false;
     }
 
     public function isPending()
@@ -34,12 +34,7 @@ class QueryResponse extends AbstractResponse
 
     public function getRedirectUrl()
     {
-        if ($this->isSuccessful()) {
-            $data = $this->getData();
-            return $data['payUrl'];
-        } else {
-            return NULL;
-        }
+        return null;
     }
 
     public function getRedirectData()
