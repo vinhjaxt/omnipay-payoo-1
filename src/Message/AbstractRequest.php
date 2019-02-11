@@ -102,6 +102,16 @@ abstract class AbstractRequest extends \Omnipay\Common\Message\AbstractRequest
         return $this->getParameter('validityTime');
     }
 
+    public function setOrderShipDate($orderShipDate)
+    {
+        return $this->setParameter('orderShipDate', $orderShipDate);
+    }
+
+    public function getOrderShipDate()
+    {
+        return $this->getParameter('orderShipDate');
+    }
+
     public function getEndpoint() {
         $endpoint = 'https://www.payoo.vn/v2/paynow/';
         if ($this->getTestMode())

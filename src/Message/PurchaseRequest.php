@@ -39,7 +39,9 @@ class PurchaseRequest extends AbstractRequest
 
     protected function buildOrderXml()
     {
-        $orderShipDate = Chronos::parse('+1 day', self::TIME_ZONE)->format('d/m/Y');
+        $orderShipDate = $this->getOrderShipDate() ? $this->getOrderShipDate() : new \DateTime('today');
+        $orderShipDate = $orderShipDate->format('d/m/Y');
+
         $validityTime = $this->getValidityTime() ? $this->getValidityTime() : new \DateTime('+24 hours');
         $validityTime = $validityTime->format('YmdHis');
 
