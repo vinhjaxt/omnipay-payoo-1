@@ -49,7 +49,7 @@ class CompletePurchaseResponse extends AbstractResponse
     public function isSignatureVerified($data) {
         if (strtoupper($data['checksum']) != strtoupper($data['computed_checksum']))
             return false;
-        return false;
+        return true;
     }
 
     public function getTransactionId()
